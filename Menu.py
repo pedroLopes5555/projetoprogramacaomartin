@@ -14,8 +14,8 @@ def  loadMenuStrings():
 
 
 def isInputValueAllowed(input):
-    if _availableInputs.__contains__(input): return True
-    return False
+    return _availableInputs.__contains__(input)
+    
 
 
 

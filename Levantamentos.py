@@ -1,3 +1,9 @@
+_allowerdInputs = [1,2,3]
+
+
+
+
+
 def getWithdrawalsAsciiArt():
     return'''
  _                           _                             _            
