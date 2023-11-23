@@ -33,13 +33,13 @@ def login():
             print("user not found")                 #check if the inouts are correct
         else:
             if(_users.get(user) == password):
-                break
+                return user
             else:
                 print("Password Errada")
     
         attempts+=1
 
-    lookAplication()                ##loock the aplication if the attempts expire
+    if attempts == 3 : lookAplication()                ##loock the aplication if the attempts expire
     
 
         

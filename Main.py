@@ -9,7 +9,10 @@ import Login
 
 Utilitis.clear_console()
 
-Login.login()
+
+user = Login.login()
+
+print("-------------------------------------------------" + user.upper() + "-------------------------------------------------")
 print(Menu.loadMenuStrings())
 
 

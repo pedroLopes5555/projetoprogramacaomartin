@@ -1,0 +1,38 @@
+Tema nº 16 – Caixa multibanco
+Uma empresa pretende desenvolver uma aplicação de gestão de movimentos
+financeiros, considerando os seguintes requisitos:
+A aplicação deve ter boa interatividade com o utilizador, recorrendo a menus
+que permitam aceder intuitivamente às suas diversas funcionalidades e
+mensagens claras sobre os dados solicitados ou apresentados.
+Os dados introduzidos pelo teclado devem ser validados, só devendo ser aceites
+e processados dados realistas.
+Devem ser implementadas estruturas de dados que, integrando diferentes tipos
+de dados (list, dict, str, int, float), mantenham a informação organizada na
+memória.
+Deve ser dada a possibilidade ao utilizador de guardar os dados no disco e de os
+carregar. Desta forma será possível manter e recuperar a informação entre
+diferentes utilizações da aplicação.
+Considere que a aplicação deve validar as credenciais do utilizador com um limite
+de 3 tentativas.
+A aplicação deverá permitir gerir (adicionar, consultar, remover ou alterar)
+contas bancárias. As contas bancárias devem conter informações como: banco,
+balcão, nome do titular, nº de conta e IBAN, nome de utilizador e senha.
+A aplicação deve permitir realizar vários movimentos como: levantamentos,
+depósitos, transferências bancárias (internas e interbancárias), pagamento de
+serviços e alteração da senha, pagamentos ao estado e carregamentos de
+telemóveis;
+O programa deve permitir registar todas as operações realizadas, de forma que
+as novas operações não substituam as anteriores;
+Deve ser possível apresentar ao utilizador:
+• listagem dos movimentos efetuados indicando: a referência, valor e saldo
+após o respetivo movimento. Deve ser pré-definido o número de
+movimentos a apresentar, podendo o utilizador personalizar esse valor;
+• número de movimentos de entrada e de saída
+• valor total de entrada e saída;
+• valor total por tipo de movimentos.
+A aplicação deve permitir que, em cada sessão, apenas se possa ver os dados
+referentes a essa conta;
+O programa deve ser desenvolvido considerando a introdução e acesso
+elemento-a-elemento. O processamento das somas, contagens e determinação
+e valores máximos e mínimos deverá ser realizado sem recurso a funções
+específicas.
