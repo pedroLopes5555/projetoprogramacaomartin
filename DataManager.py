@@ -10,6 +10,13 @@ class BankAccount:
         self.banco = banco
         self.nome = nome
         self.balcao = balcao
+    
+    
+    def toString(self):
+        return f"{self.n_account},{self.user},{self.password},{self.balance},{self.IBAN},{self.banco},{self.nome},{self.balcao}"
+    
+
+
 
 class Transferencias:
     def __init__(self, user_id, id_transfer, date, value):
@@ -18,9 +25,12 @@ class Transferencias:
         self.date = date
         self.value = value
 
+    def toString(self):
+        return f"{self.user_id},{self.id_transfer},{self.date},{self.value}"
 
-# Specify the path to your CSV file
-csv_file_path = r'db\users_table.csv'
+
+
+
 
 bankAccounts  = []
 
@@ -51,10 +61,51 @@ def getUsersPasswordsDic():
     return {user[1]: user[2] for user in users}
 
 
+def getUserLine(username):
+    loadData()
+    i = 0
+    for account in bankAccounts:
+        if username == account.user:
+            return i
+        i += 1
+
+
+def changeAccountBalance(username, newBalance):
+    csv_file_path = r'db\users_table.csv'
+
+    with open(csv_file_path, 'r') as file:
+        lines = file.readlines()
+
+    account = getBankAccountByUser(username);
+    account.balance = newBalance 
+    lines[getUserLine(username)] = account.toString()
+
+    with open(csv_file_path, 'w') as file:
+        file.writelines(lines)
+
+
+def saveTransfer(user_id, id_tranfer,date,value):
+    csv_file_path = r'db\transferencias.csv'
+
+    with open(csv_file_path, 'R') as file:
+        lines = file.readlines()
+
+    transf = Transferencias(user_id= user_id, id_transfer= id_tranfer, date= date, value= value)
+
+    lines.append(transf.toString())
+
+    with open(csv_file_path, 'w') as file:
+        file.writelines(lines)
+
+    
+
+
+
+
 
 def loadData():
     # Open the CSV file and read its contents into the matrix
-    with open(csv_file_path, 'r') as file:
+    with open(r'db\users_table.csv', 'r') as file:
         csv_reader = csv.reader(file)
         
         # Iterate over each row in the CSV file
@@ -63,12 +114,10 @@ def loadData():
             users.append(row)
             bankAccounts.append(BankAccount(n_account = row[0],user =  row[1],password =  row[2],balance = row[3],IBAN = row[4],banco = row[5],nome = row[6],balcao =row[7]))
 
-
-    icsv_file_path = r'db\transferencias.csv'
     account_moves = []
 
     # Open the CSV file and read its contents into the matrix
-    with open(csv_file_path, 'r') as file:
+    with open(r'db\transferencias.csv', 'r') as file:
         csv_reader = csv.reader(file)
         
         # Iterate over each row in the CSV file
@@ -76,24 +125,6 @@ def loadData():
             # Append the row as a list to the matrix
             account_moves.append(row)
             transfers.append(Transferencias(user_id= row[0], id_transfer=row[1],date=row[2],value=row[3]))
-
-def createNewUser():
-    print("todo")
-
-
-
-
-
-# Now, 'matrix' contains the data from the CSV file
-#print(users)
-#print(users[1][1])
-
-
-
-# Specify the path to your CSV file
-
-
-# Initialize an empty list to store the data
 
 
 

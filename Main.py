@@ -8,7 +8,7 @@ import DataManager
 import time
 
 
-Utilitis.clear_console()
+
 
 
 Utilitis.clear_console()
@@ -27,6 +27,8 @@ while(attempts < 3):
 if(attempts == 3): Login.lookAplication()
 
 
+
+#username = 'Pedro'
 User = DataManager.getBankAccountByUser(username)
     
 
@@ -37,20 +39,41 @@ print("-------------------------------------------------" + username + "--------
 print(Menu.loadMenuStrings())
 
 
+
+
+def levantamento():
+    while(True):
+        value = input("Qual o valor a levantar:\n")
+
+        if value.isdigit():
+            if(int(User.balance) < int(value)):
+                print("Erro, saldo insuficiente")
+            else:
+                DataManager.changeAccountBalance(username, str(int(User.balance)-int(value)))
+                break
+        else:
+            print("Valor invalido")
+
+
+
+
+
+
+
+
 while(True):        
     case = input("escolha uma opção:\n\n")
     if case ==  "1":
         Utilitis.clear_console()
         print(Levantamentos.getWithdrawalsAsciiArt())
-        value = int(input("Qual o valor a levantar:\n"))
-        if(int(User.balance) < value):
-            print("Erro, saldo insuficiente")
+        levantamento()
     else:
         print("-----ESCOLHA INVALIDA-----")
         time.sleep(2)
         Utilitis.clear_console()
         print("-------------------------------------------------" + username + "-------------------------------------------------")
         print(Menu.loadMenuStrings())
+
 
 
 
