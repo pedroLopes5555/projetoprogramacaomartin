@@ -1,3 +1,3 @@
-﻿n_account,user,password,balance
-1,Martim Silva,ola123,343423
-2,Pedro Lopes,qwerty1234,123
+﻿n_account,user,password,balance,IBAN,banco,nome,balcao
+1,Martim,ola123,343423,2423423432423423432423,BCP,Martim Silva,x
+2,Pedro,qwerty1234,123,23432432432432423,MONTEPIO, Pedro Lopes,n

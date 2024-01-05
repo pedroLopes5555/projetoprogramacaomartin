@@ -15,8 +15,19 @@ diferentes utilizações da aplicação.
 Considere que a aplicação deve validar as credenciais do utilizador com um limite
 de 3 tentativas.
 A aplicação deverá permitir gerir (adicionar, consultar, remover ou alterar)
-contas bancárias. As contas bancárias devem conter informações como: banco,
-balcão, nome do titular, nº de conta e IBAN, nome de utilizador e senha.
+contas bancárias. As contas bancárias devem conter informações como:
+,
+balcão
+, nome do titular,
+ e IBAN,
+  
+  
+ nº de conta 
+  nome de utilizador 
+  e senha.
+
+
+
 A aplicação deve permitir realizar vários movimentos como: levantamentos,
 depósitos, transferências bancárias (internas e interbancárias), pagamento de
 serviços e alteração da senha, pagamentos ao estado e carregamentos de

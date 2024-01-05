@@ -1,12 +1,13 @@
 import getpass
 import Utilitis
 import time
+import Levantamentos
+import DataManager
+
 
 # Creating a dictionary for the Users and passwords (unsafe)
-_users = {
-    'Pedro Lopes': 'qwerty1234',
-    'Martim Silva': "ola123"
-}
+
+
 
 
 def lookAplication():
@@ -20,26 +21,19 @@ def lookAplication():
 
 
 
-def login():
+def login(username, password):
+    userPass = DataManager.getUsersPasswordsDic()
     attempts = 0  #numero de tentativas para por username e passaword
     while(attempts < 3):   #a cada cilco soma uma tentativa e nao pode ser maior que 3
-        Utilitis.clear_console()
-        print("-----------------------------------------------------")
-        user = input("Username : ")                             #limpa a cosola e pede o username e a password
-        password = getpass.getpass("Enter your password: ")     #a password e pedida, mas nao e mostrada no eccra
 
-        
-        if(not user in _users): 
-            print("user not found")                 #check if the inouts are correct
+        if(not username  in userPass):
+            print("user dosent exists")
         else:
-            if(_users.get(user) == password):
-                return user
+            if(password == userPass[username]):
+                return True
             else:
-                print("Password Errada")
-    
-        attempts+=1
-
-    if attempts == 3 : lookAplication()                ##loock the aplication if the attempts expire
+                print("Password Incorrect")
+        return False            
     
 
 
