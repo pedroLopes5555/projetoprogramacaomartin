@@ -1,2 +1,4 @@
-﻿id_user,id_tranfer,date,value
-1,1,11_28_23,-40
+﻿n_account,id_tranfer,date,value,type
+1,1,11-28-23,-40,ola2,17,2024-01-06 00:02:17.729438,-10,levantamento
+2,18,2024-01-06 00:02:30.024385,+20,deposito
+2,19,2024-01-06 00:02:47.125260,+10000,deposito

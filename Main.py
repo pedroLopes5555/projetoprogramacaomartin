@@ -1,5 +1,5 @@
 import Menu
-import Levantamentos
+import AsciiArt
 import Utilitis
 import Login
 import pandas as pd
@@ -11,34 +11,31 @@ import time
 
 
 
-Utilitis.clear_console()
-print("-----------------------------------------------------")
+# Utilitis.clear_console()
+# print("-----------------------------------------------------")
+# attempts = 0
 
-attempts = 0
-
-while(attempts < 3):
+# while(attempts < 3):
     
-    username = input("Username : ")                             #limpa a cosola e pede o username e a password
-    password = getpass.getpass("Enter your password: ")     #a password e pedida, mas nao e mostrada no eccra
+#     username = input("Username : ")                             #limpa a cosola e pede o username e a password
+#     password = getpass.getpass("Enter your password: ")     #a password e pedida, mas nao e mostrada no eccra
 
-    if(Login.login(username, password)): break
-    attempts += 1
+#     if(Login.login(username, password)): break
+#     attempts += 1
 
-if(attempts == 3): Login.lookAplication()
+# if(attempts == 3): Login.lookAplication()
 
 
 
-#username = 'Pedro'
+username = 'Pedro'
 User = DataManager.getBankAccountByUser(username)
     
 
 Utilitis.clear_console()
 
 
-print("-------------------------------------------------" + username + "-------------------------------------------------")
-print(Menu.loadMenuStrings())
-
-
+# print("-------------------------------------------------" + username + "-------------------------------------------------")
+# print(Menu.loadMenuStrings())
 
 
 def levantamento():
@@ -50,29 +47,56 @@ def levantamento():
                 print("Erro, saldo insuficiente")
             else:
                 DataManager.changeAccountBalance(username, str(int(User.balance)-int(value)))
+                DataManager.addLastTrasnferNumber()
+                flag = "-"
+                DataManager.saveTransfer(user_id= User.n_account ,id_tranfer = DataManager.getLastTrasnferNumber(),date= Utilitis.getTime(), value= flag + value, type= "levantamento")
+                print("\nLEVANTAMENTO EFETUADO COM SUCESSO")
+                time.sleep(2)
+                break
+        else:
+            print("Valor invalido")
+
+def deposito():
+    while(True):
+        value = input("Qual o valor a depositar:\n")
+
+        if value.isdigit():
+                DataManager.changeAccountBalance(username, str(int(User.balance) + int(value)))
+                DataManager.addLastTrasnferNumber()
+                flag = "+"
+                DataManager.saveTransfer(user_id= User.n_account ,id_tranfer = DataManager.getLastTrasnferNumber(),date= Utilitis.getTime(), value= flag + value, type="deposito")
+                print("\nDEPOSITO EFETUADO COM SUCESSO")
+                time.sleep(2)
                 break
         else:
             print("Valor invalido")
 
 
-
-
-
-
-
-
-while(True):        
+while(True):
+    print("-------------------------------------------------" + username + "-------------------------------------------------")
+    print(Menu.loadMenuStrings())
+ 
     case = input("escolha uma opção:\n\n")
     if case ==  "1":
         Utilitis.clear_console()
-        print(Levantamentos.getWithdrawalsAsciiArt())
+        print(AsciiArt.getWithdrawalsAsciiArt())
         levantamento()
+        Utilitis.clear_console()
+
+    if  case == "2":
+        Utilitis.clear_console()
+        print(AsciiArt.depositosAsciiArt())
+        deposito()
+        Utilitis.clear_console()
+
+
     else:
         print("-----ESCOLHA INVALIDA-----")
         time.sleep(2)
         Utilitis.clear_console()
         print("-------------------------------------------------" + username + "-------------------------------------------------")
         print(Menu.loadMenuStrings())
+
 
 
 

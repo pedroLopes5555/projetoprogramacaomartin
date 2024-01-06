@@ -19,14 +19,15 @@ class BankAccount:
 
 
 class Transferencias:
-    def __init__(self, user_id, id_transfer, date, value):
+    def __init__(self, user_id, id_transfer, date, value, type):
         self.user_id = user_id
         self.id_transfer = id_transfer
         self.date = date
         self.value = value
+        self.type = type
 
     def toString(self):
-        return f"{self.user_id},{self.id_transfer},{self.date},{self.value}"
+        return f"{self.user_id},{self.id_transfer},{self.date},{self.value},{self.type}"
 
 
 
@@ -84,20 +85,33 @@ def changeAccountBalance(username, newBalance):
         file.writelines(lines)
 
 
-def saveTransfer(user_id, id_tranfer,date,value):
+def saveTransfer(user_id, id_tranfer,date,value,type):
     csv_file_path = r'db\transferencias.csv'
 
-    with open(csv_file_path, 'R') as file:
+    with open(csv_file_path, 'r') as file:
         lines = file.readlines()
-
-    transf = Transferencias(user_id= user_id, id_transfer= id_tranfer, date= date, value= value)
-
-    lines.append(transf.toString())
-
+    transf = Transferencias(user_id= user_id, id_transfer= id_tranfer, date= date, value= value,type=type)
+    lines.append(transf.toString() + "\n")
     with open(csv_file_path, 'w') as file:
         file.writelines(lines)
 
     
+def getLastTrasnferNumber():
+    csv_file_path = r'db\lastTransfer.csv'
+    with open(csv_file_path, 'r') as file:
+        lines = file.readlines()
+    return int(lines[0])
+
+def addLastTrasnferNumber():
+    csv_file_path = r'db\lastTransfer.csv'
+    with open(csv_file_path, 'r') as file:
+        lines = file.readlines()
+    helper = int(lines[0]) + 1
+    lines[0] = str(helper)
+    with open(csv_file_path, 'w') as file:
+        file.writelines(lines)
+
+
 
 
 
@@ -124,7 +138,7 @@ def loadData():
         for row in csv_reader:
             # Append the row as a list to the matrix
             account_moves.append(row)
-            transfers.append(Transferencias(user_id= row[0], id_transfer=row[1],date=row[2],value=row[3]))
+            transfers.append(Transferencias(user_id= row[0], id_transfer=row[1],date=row[2],value=row[3],type=row[4]))
 
 
 
